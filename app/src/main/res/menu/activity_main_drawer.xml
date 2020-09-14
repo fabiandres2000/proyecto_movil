@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/home_foreground"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@mipmap/plus_foreground"
+            android:title="Registrar Medico" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@mipmap/plus_foreground"
+            android:title="Registrar Paciente" />
+        <item
+            android:id="@+id/sintomasFragment"
+            android:icon="@mipmap/plus2_foreground"
+            android:title="Registrar Sintoma" />
+        <item
+            android:id="@+id/enfermedadesFragment"
+            android:icon="@mipmap/plus2_foreground"
+            android:title="Registrar Enfermedad" />
+        <item
+            android:id="@+id/listaSintomasFragment"
+            android:icon="@mipmap/menu_foreground"
+            android:title="Listar Sintomas" />
+        <item
+            android:id="@+id/listaEnfermedadesFragment"
+            android:icon="@mipmap/menu_foreground"
+            android:title="Listar Enfermedades" />
+        <item
+            android:id="@+id/listaMedicosFragment"
+            android:icon="@mipmap/menu_foreground"
+            android:title="Listar Medicos" />
+        <item
+            android:id="@+id/listarPacientesFragment"
+            android:icon="@mipmap/menu_foreground"
+            android:title="Listar Pacientes" />
+        <item
+            android:id="@+id/enfermedadSintomaFragment"
+            android:icon="@mipmap/asociar_foreground"
+            android:title="Asociar Enfermedad-Sintoma" />
+
+    </group>
+</menu>

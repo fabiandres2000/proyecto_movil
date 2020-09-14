@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/paginaBienvenida">
+
+    <fragment
+        android:id="@+id/paginaBienvenida"
+        android:name="com.example.proyecto.PaginaBienvenida"
+        android:label="fragment_pagina_bienvenida"
+        tools:layout="@layout/fragment_pagina_bienvenida" />
+    <fragment
+        android:id="@+id/realizarDiagnostico"
+        android:name="com.example.proyecto.RealizarDiagnostico"
+        android:label="fragment_realizar_diagnostico"
+        tools:layout="@layout/fragment_realizar_diagnostico" />
+    <fragment
+        android:id="@+id/registraCita"
+        android:name="com.example.proyecto.RegistraCita"
+        android:label="fragment_registra_cita"
+        tools:layout="@layout/fragment_registra_cita" />
+    <fragment
+        android:id="@+id/misCitas"
+        android:name="com.example.proyecto.MisCitas"
+        android:label="fragment_mis_citas"
+        tools:layout="@layout/fragment_mis_citas" />
+    <fragment
+        android:id="@+id/misDiagnosticosFragment"
+        android:name="com.example.proyecto.MisDiagnosticosFragment"
+        android:label="fragment_mis_diagnosticos"
+        tools:layout="@layout/fragment_mis_diagnosticos" />
+</navigation>

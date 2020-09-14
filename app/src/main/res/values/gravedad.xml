@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gravedad">
+        <item>Seleccione...</item>
+        <item>Leve</item>
+        <item>Medio</item>
+        <item>Grave</item>
+        <item>Muy grave</item>
+    </string-array>
+</resources>

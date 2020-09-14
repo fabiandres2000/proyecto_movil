@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="minutos">
+        <item>Seleccione...</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>00</item>
+    </string-array>
+</resources>

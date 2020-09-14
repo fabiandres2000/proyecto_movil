@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.proyecto.ui.home.HomeFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.proyecto.ui.gallery.GalleryFragment"
+        android:label="Registra Medico"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.proyecto.ui.slideshow.SlideshowFragment"
+        android:label="Registrar Paciente"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/sintomasFragment"
+        android:name="com.example.proyecto.SintomasFragment"
+        android:label="Registrar sintoma"
+        tools:layout="@layout/fragment_sintomas" />
+    <fragment
+        android:id="@+id/enfermedadesFragment"
+        android:name="com.example.proyecto.EnfermedadesFragment"
+        android:label="Registrar enfermedad"
+        tools:layout="@layout/fragment_enfermedades" />
+    <fragment
+        android:id="@+id/listaSintomasFragment"
+        android:name="com.example.proyecto.ListaSintomasFragment"
+        android:label="Sintomas Registrados"
+        tools:layout="@layout/fragment_lista_sintomas" />
+    <fragment
+        android:id="@+id/listaEnfermedadesFragment"
+        android:name="com.example.proyecto.ListaEnfermedadesFragment"
+        android:label="Enfermedades Registradas"
+        tools:layout="@layout/fragment_lista_enfermedades" />
+    <fragment
+        android:id="@+id/listaMedicosFragment"
+        android:name="com.example.proyecto.ListaMedicosFragment"
+        android:label="Medicos Registrados"
+        tools:layout="@layout/fragment_lista_medicos" />
+    <fragment
+        android:id="@+id/listarPacientesFragment"
+        android:name="com.example.proyecto.ListarPacientesFragment"
+        android:label="Pacientes Registrados"
+        tools:layout="@layout/fragment_listar_pacientes" />
+    <fragment
+        android:id="@+id/enfermedadSintomaFragment"
+        android:name="com.example.proyecto.EnfermedadSintomaFragment"
+        android:label="Asociar Enfermedad-Sintoma"
+        tools:layout="@layout/fragment_enfermedad_sintoma" />
+</navigation>

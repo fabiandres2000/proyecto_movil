@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/paginaBienvenida"
+        android:title="Inicio"
+        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/realizarDiagnostico"
+        android:title="Diagnostico"
+        android:icon="@drawable/ic_baseline_youtube_searched_for_24"/>
+    <item
+        android:id="@+id/misDiagnosticosFragment"
+        android:title="Mis Diagnosticos"
+        android:icon="@drawable/diagnostico"/>
+    <item
+        android:id="@+id/registraCita"
+        android:title="Apartar Cita"
+        android:icon="@drawable/cita"/>
+    <item
+        android:id="@+id/misCitas"
+        android:title="Mis Citas"
+        android:icon="@drawable/calendario"/>
+
+</menu>
