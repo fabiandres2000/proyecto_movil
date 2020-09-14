@@ -60,8 +60,7 @@
             android:id="@+id/elegirfecha"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
-            android:background="#1F6F93"
-            android:text="Seleccionar fecha"
+            android:background="@drawable/button"
             android:textColor="#fff" />
 
         <Space
@@ -88,7 +87,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="14dp" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,14 +96,14 @@
 
             <Spinner
                 android:id="@+id/hora"
-                android:layout_width="match_parent"
+                android:layout_width="191dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/horas" />
 
             <Spinner
                 android:id="@+id/minuto"
-                android:layout_width="match_parent"
+                android:layout_width="189dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/minutos" />
@@ -116,12 +115,11 @@
             android:layout_height="11dp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/guardarcita"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
-            android:background="#1F6F93"
-            android:text="Apartar Cita"
-            android:textColor="#fff"/>
+            android:background="@drawable/agendarcita"
+            android:textColor="#fff" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,16 +2,20 @@ package com.example.proyecto;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import android.graphics.Color;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -52,10 +56,16 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
     private String mParam2;
 
     TextView fechacita;
+    String fecha;
     Button elegir_fecha;
     SweetAlertDialog pDialog;
     JsonObjectRequest jsonObjectRequest;
     Spinner medicocita;
+    String paciente;
+    Button guardarcita;
+    Spinner hora,minuto;
+    SweetAlertDialog pDialog3;
+
     public RegistraCita() {
         // Required empty public constructor
     }
@@ -86,7 +96,7 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    String usuariop,tipop;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,15 +105,40 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
         fechacita = view.findViewById(R.id.fechacita);
         elegir_fecha = view.findViewById(R.id.elegirfecha);
         medicocita = view.findViewById(R.id.medicocita);
+        hora = view.findViewById(R.id.hora);
+        minuto = view.findViewById(R.id.minuto);
+        guardarcita = view.findViewById(R.id.guardarcita);
+        pDialog3 = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+
         llenar_spinner();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences preferences = getActivity().getSharedPreferences("datoslogin", Context.MODE_PRIVATE);
+                boolean sesion = preferences.getBoolean("session", false);
+                tipop = preferences.getString("tipo","ninguno");
+                usuariop = preferences.getString("usuario","ninguno");
+                obtener_paciente();
+            }
+        },2000);
+
         elegir_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showdatepicker();
             }
         });
+
+        guardarcita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                guardarcita();
+            }
+        });
+
         return  view;
     }
+
 
     private void showdatepicker(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -118,7 +153,7 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        String fecha = i2+"-"+i1+"-"+i;
+        fecha = i2+"-"+i1+"-"+i;
         fechacita.setText(fecha);
     }
 
@@ -174,5 +209,71 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
         }catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void obtener_paciente(){
+        String url="https://dep2020.000webhostapp.com/consultar_paciente.php?email="+usuariop;
+        url = url.replace(" ","%20");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray json = response.optJSONArray("paciente");
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = json.getJSONObject(0);
+                     paciente = jsonObject.optString("nombre_completo");
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.toString())
+                        .show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        requestQueue.add(request);
+    }
+
+    String respuesta;
+    public void guardarcita(){
+        pDialog3.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog3.setTitleText("Validando fecha ...");
+        pDialog3.setCancelable(true);
+        pDialog3.show();
+        String url="https://dep2020.000webhostapp.com/guardar_cita.php?medico="+medicocita.getSelectedItem().toString()+"&paciente="+paciente+"&fecha="+fecha+"&hora="+hora.getSelectedItem().toString()+"&minuto="+minuto.getSelectedItem().toString();
+        url = url.replace(" ","%20");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray json = response.optJSONArray("respuesta");
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = json.getJSONObject(0);
+                    respuesta = jsonObject.optString("res");
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                pDialog3.hide();
+                new SweetAlertDialog(getContext())
+                        .setTitleText(respuesta)
+                        .show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog3.hide();
+                new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.toString())
+                        .show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        requestQueue.add(request);
     }
 }

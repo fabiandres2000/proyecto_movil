@@ -2,6 +2,8 @@ package com.example.proyecto;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import android.graphics.Color;
 
 import androidx.fragment.app.Fragment;
 
@@ -48,7 +50,6 @@ public class EnfermedadSintomaFragment extends Fragment implements Response.List
     private String mParam2;
 
     Spinner senfermedad,ssintoma ;
-    ProgressDialog dialogo;
     JsonObjectRequest jsonObjectRequest;
     Button btnasociar;
 
@@ -101,10 +102,14 @@ public class EnfermedadSintomaFragment extends Fragment implements Response.List
         return vista;
     }
 
+    SweetAlertDialog pDialog2;
     private void llenar_spiner() {
-        dialogo = new ProgressDialog(this.getContext());
-        dialogo.setMessage("Espere...");
-        dialogo.show();
+        pDialog2 = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog2.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog2.setTitleText("Espere ...");
+        pDialog2.setCancelable(true);
+        pDialog2.show();
+
         String url="https://dep2020.000webhostapp.com/listar_sintomas_enfermedades.php";
 
         url = url.replace(" ","%20");
@@ -116,13 +121,16 @@ public class EnfermedadSintomaFragment extends Fragment implements Response.List
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se pudo conectar debido a:"+error.toString(), Toast.LENGTH_LONG).show();
-        dialogo.hide();
+        new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Oops...")
+                .setContentText(error.toString())
+                .show();
+        pDialog2.hide();
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        dialogo.hide();
+        pDialog2.hide();
         JSONArray json = response.optJSONArray("enfermedad");
         JSONArray json2 = response.optJSONArray("sintoma");
         JSONObject jsonObject = null;
@@ -159,22 +167,30 @@ public class EnfermedadSintomaFragment extends Fragment implements Response.List
         }
     }
 
+    SweetAlertDialog pDialog;
     public void asociar(){
-        dialogo = new ProgressDialog(this.getContext());
-        dialogo.setMessage("Espere...");
-        dialogo.show();
+        pDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Espere ...");
+        pDialog.setCancelable(true);
+        pDialog.show();
         String url = "https://dep2020.000webhostapp.com/asociar.php?enfermedad="+senfermedad.getSelectedItem()+"&sintoma="+ssintoma.getSelectedItem();
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), ""+response, Toast.LENGTH_LONG).show();
-                dialogo.hide();
+                new SweetAlertDialog(getContext())
+                        .setTitleText(response.toString())
+                        .show();
+                pDialog.hide();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                dialogo.hide();
-                Toast.makeText(getContext(), "No se pudo conectar debido a:"+error.toString(), Toast.LENGTH_LONG).show();
+                pDialog.hide();
+                new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.toString())
+                        .show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
