@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Inicio"
+        android:id="@+id/inicioMedicoFragment"
+        android:icon="@drawable/ic_baseline_home_24" />
+    <item android:title="Citas"
+        android:id="@+id/citasMedicoFragment"
+        android:icon="@drawable/ic_baseline_calendar_today_24" />
+    <item android:title="Configuracion"
+        android:id="@+id/editarMedicoFragment"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+</menu>

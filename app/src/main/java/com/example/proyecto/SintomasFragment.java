@@ -22,6 +22,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import android.graphics.Color;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SintomasFragment#newInstance} factory method to
@@ -39,7 +42,7 @@ public class SintomasFragment extends Fragment  implements Response.Listener<JSO
     private String mParam2;
 
     EditText codigo,descripcion;
-    ProgressDialog dialogo;
+    SweetAlertDialog dialogo;
     Button guardar;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -97,9 +100,13 @@ public class SintomasFragment extends Fragment  implements Response.Listener<JSO
     }
 
     public void cargarwebservice(){
-        dialogo = new ProgressDialog(getContext());
-        dialogo.setMessage("Cargando...");
+
+        dialogo = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+        dialogo.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        dialogo.setTitleText("Espere ...");
+        dialogo.setCancelable(true);
         dialogo.show();
+
         String url="https://dep2020.000webhostapp.com/registrar_sintoma.php?codigo="+codigo.getText().toString()
                 +"&descripcion="+descripcion.getText().toString();
 
@@ -111,15 +118,20 @@ public class SintomasFragment extends Fragment  implements Response.Listener<JSO
     }
     @Override
     public void onResponse(JSONObject response) {
-        Toast.makeText(getContext(), "Datos Registrados correctamente", Toast.LENGTH_LONG).show();
         dialogo.hide();
         codigo.setText("");
         descripcion.setText("");
+        new SweetAlertDialog(getContext())
+                .setTitleText("Sintoma registrado correctamente!")
+                .show();
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se pudo conectar debido a:"+error.toString(), Toast.LENGTH_LONG).show();
         dialogo.hide();
+        new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Oops...")
+                .setContentText("No se pudo conectar debido a:"+error.toString())
+                .show();
     }
 }

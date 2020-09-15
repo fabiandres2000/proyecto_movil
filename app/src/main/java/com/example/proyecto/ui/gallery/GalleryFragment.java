@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,7 +30,7 @@ public class GalleryFragment extends Fragment implements Response.Listener<JSONO
 
     EditText cedula,nombrecompleto,edad,especialidad,clave,email,direccion,telefono;
     Button btnLogin;
-    ProgressDialog dialogo;
+    SweetAlertDialog dialogo;
 
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -62,9 +63,13 @@ public class GalleryFragment extends Fragment implements Response.Listener<JSONO
     }
 
     public void cargarwebservice(){
-        dialogo = new ProgressDialog(getContext());
-        dialogo.setMessage("cargando...");
+
+        dialogo = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+        dialogo.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        dialogo.setTitleText("Espere ...");
+        dialogo.setCancelable(true);
         dialogo.show();
+
         String url="https://dep2020.000webhostapp.com/registrar_medico.php?cedula="+cedula.getText().toString()
                 +"&nombre_completo="+nombrecompleto.getText().toString()
                 +"&edad="+edad.getText().toString()
@@ -83,7 +88,6 @@ public class GalleryFragment extends Fragment implements Response.Listener<JSONO
 
     @Override
     public void onResponse(JSONObject response) {
-        Toast.makeText(getContext(), "Datos Registrados correctamente", Toast.LENGTH_LONG).show();
         dialogo.hide();
         cedula.setText("");
         nombrecompleto.setText("");
@@ -93,12 +97,19 @@ public class GalleryFragment extends Fragment implements Response.Listener<JSONO
         clave.setText("");
         direccion.setText("");
         telefono.setText("");
+        new SweetAlertDialog(getContext())
+                .setTitleText("Medico registrado correctamente!")
+                .show();
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No se pudo conectar debido a:"+error.toString(), Toast.LENGTH_LONG).show();
         dialogo.hide();
+        new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Oops...")
+                .setContentText("No se pudo conectar debido a:"+error.toString())
+                .show();
+
     }
 
 

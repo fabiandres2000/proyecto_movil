@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PacienteActivity" android:label="Bienvenido de nuevo!"></activity>
+        <activity android:name=".MedicoActivity" android:label="Bienvenido de nuevo!"></activity>
+        <activity
+            android:name=".PacienteActivity"
+            android:label="Bienvenido de nuevo!" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />

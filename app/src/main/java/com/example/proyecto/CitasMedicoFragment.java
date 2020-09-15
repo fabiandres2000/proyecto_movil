@@ -2,17 +2,15 @@ package com.example.proyecto;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import cn.pedant.SweetAlert.SweetAlertDialog;
-import android.graphics.Color;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,13 +28,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MisCitas#newInstance} factory method to
+ * Use the {@link CitasMedicoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MisCitas extends Fragment {
+public class CitasMedicoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,7 +50,7 @@ public class MisCitas extends Fragment {
     ListView listacitas;
     SweetAlertDialog pDialog;
 
-    public MisCitas() {
+    public CitasMedicoFragment() {
         // Required empty public constructor
     }
 
@@ -61,11 +60,11 @@ public class MisCitas extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MisCitas.
+     * @return A new instance of fragment CitasMedicoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MisCitas newInstance(String param1, String param2) {
-        MisCitas fragment = new MisCitas();
+    public static CitasMedicoFragment newInstance(String param1, String param2) {
+        CitasMedicoFragment fragment = new CitasMedicoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,8 +85,15 @@ public class MisCitas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_mis_citas, container, false);
-        listacitas = view.findViewById(R.id.listacitas);
+        View view =  inflater.inflate(R.layout.fragment_citas_medico, container, false);
+        listacitas = view.findViewById(R.id.lista_citas_medico);
+
+        pDialog =  new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("espere un momento...");
+        pDialog.setCancelable(true);
+        pDialog.show();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -95,38 +101,34 @@ public class MisCitas extends Fragment {
                 boolean sesion = preferences.getBoolean("session", false);
                 tipop = preferences.getString("tipo","ninguno");
                 usuariop = preferences.getString("usuario","ninguno");
-                obtener_paciente();
+                obtener_medico();
             }
         },2000);
-
-        pDialog =  new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Espere mientras se cargan los datos...");
-        pDialog.setCancelable(true);
-        pDialog.show();
 
         listacitas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                cancelar_cita(i);
+                atender_cita(i);
             }
         });
-        return view;
+
+        return  view;
     }
 
-    String paciente;
-    public void obtener_paciente(){
-        String url="https://dep2020.000webhostapp.com/consultar_paciente.php?email="+usuariop;
+    String medico;
+    public void obtener_medico(){
+        String url="https://dep2020.000webhostapp.com/consultar_medico.php?email="+usuariop;
         url = url.replace(" ","%20");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                JSONArray json = response.optJSONArray("paciente");
+                pDialog.hide();
+                JSONArray json = response.optJSONArray("medico");
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = json.getJSONObject(0);
-                    paciente = jsonObject.optString("nombre_completo");
-                    llenar_lista_citas(paciente);
+                    medico = jsonObject.optString("nombre_completo");
+                    llenar_lista_citas(medico);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -144,10 +146,11 @@ public class MisCitas extends Fragment {
         requestQueue.add(request);
     }
 
+
     ArrayList<String> lista;
     ArrayList<String> listaid;
-    public  void llenar_lista_citas(String paciente){
-        String url = "https://dep2020.000webhostapp.com/listar_citas.php?paciente="+paciente;
+    public  void llenar_lista_citas(String medico){
+        String url = "https://dep2020.000webhostapp.com/listar_citas_medico.php?medico="+medico;
         url = url.replace(" ","%20");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
@@ -183,7 +186,7 @@ public class MisCitas extends Fragment {
                 pDialog.hide();
                 new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Oops...")
-                        .setContentText("Aùn no ha registrado ninguna cita")
+                        .setContentText("Aùn no se le ha asociado  ninguna cita")
                         .show();
             }
         });
@@ -191,8 +194,7 @@ public class MisCitas extends Fragment {
         requestQueue.add(request);
     }
 
-
-    public void cancelar_cita(int posicion){
+    public void atender_cita(int posicion){
         String cita = lista.get(posicion);
         final String idcita = listaid.get(posicion);
         new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
@@ -203,7 +205,7 @@ public class MisCitas extends Fragment {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         sDialog.dismissWithAnimation();
-                        cancelar_cita_2(idcita);
+                        atender_cita_2(idcita);
                     }
                 })
                 .setCancelButton("No!", new SweetAlertDialog.OnSweetClickListener() {
@@ -215,13 +217,15 @@ public class MisCitas extends Fragment {
                 .show();
     }
 
-    public void  cancelar_cita_2(String id_cita){
+    public void  atender_cita_2(String id_cita){
+
         pDialog =  new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Cancelando cita...");
+        pDialog.setTitleText("Atendiendo cita...");
         pDialog.setCancelable(true);
         pDialog.show();
-        String url = "https://dep2020.000webhostapp.com/cancelar_cita.php?id_cita="+id_cita;
+
+        String url = "https://dep2020.000webhostapp.com/atender_cita.php?id_cita="+id_cita;
         url = url.replace(" ","%20");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
@@ -230,14 +234,14 @@ public class MisCitas extends Fragment {
                 JSONArray json = response.optJSONArray("respuesta");
                 JSONObject jsonObject = null;
                 try {
-                        jsonObject = json.getJSONObject(0);
-                        String respuesta =  (jsonObject.optString("res"));
-                        new SweetAlertDialog(getContext())
+                    jsonObject = json.getJSONObject(0);
+                    String respuesta =  (jsonObject.optString("res"));
+                    new SweetAlertDialog(getContext())
                             .setTitleText(respuesta)
                             .show();
-                        llenar_lista_citas(paciente);
+                    llenar_lista_citas(medico);
                 }catch (JSONException e){
-                        e.printStackTrace();
+                    e.printStackTrace();
                 }
 
             }

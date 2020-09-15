@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.proyecto.Entidades.Medico;
+
 public class IntermedioActivity extends AppCompatActivity {
     ProgressBar barra;
     @Override
@@ -33,7 +35,9 @@ public class IntermedioActivity extends AppCompatActivity {
                         finish();
                     }else{
                         if(tipo.equals("medico")){
-
+                            Intent intent = new Intent(getApplicationContext(), MedicoActivity.class);
+                            startActivity(intent);
+                            finish();
                         }else{
                             if(tipo.equals("paciente")){
                                 Intent intent = new Intent(getApplicationContext(), PacienteActivity.class);

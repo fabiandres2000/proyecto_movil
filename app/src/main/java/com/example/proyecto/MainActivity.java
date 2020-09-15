@@ -132,6 +132,9 @@ public class MainActivity extends AppCompatActivity implements  Response.Listene
         }else{
             if(tipo.equals("medico")){
                 Toast.makeText(MainActivity.this, "Usted es medico", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MedicoActivity.class);
+                startActivity(intent);
+                finish();
             }else{
                 if (tipo.equals("paciente")){
                     Toast.makeText(MainActivity.this, "Usted es paciente", Toast.LENGTH_LONG).show();
