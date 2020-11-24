@@ -188,6 +188,7 @@ public class RealizarDiagnostico extends Fragment implements   Response.Listener
                         CheckBox cb = new CheckBox(getContext());
                         cb.setId(id);
                         cb.setText(descripcion);
+                        cb.setTextColor(Color.parseColor("#FFFFFF"));
                         cb.setOnClickListener(seleccionar);
                         layout_base.addView(cb);
                     }

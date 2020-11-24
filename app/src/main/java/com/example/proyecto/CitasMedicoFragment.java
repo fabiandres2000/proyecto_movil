@@ -198,7 +198,7 @@ public class CitasMedicoFragment extends Fragment {
         String cita = lista.get(posicion);
         final String idcita = listaid.get(posicion);
         new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("¿Esta seguro de cancelar la cita medica?")
+                .setTitleText("¿Esta seguro de marcar como atendida la cita medica?")
                 .setContentText(cita)
                 .setConfirmText("Si!")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {

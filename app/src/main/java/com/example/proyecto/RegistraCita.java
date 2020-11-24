@@ -2,7 +2,9 @@ package com.example.proyecto;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.usage.UsageEvents;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -10,6 +12,7 @@ import android.graphics.Color;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Calendar;
 
 /**
@@ -150,10 +154,13 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
         );
         datePickerDialog.show();
     }
-
+    int dia,mes,año;
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         fecha = i2+"-"+i1+"-"+i;
+        dia = i2;
+        mes = i1;
+        año = i;
         fechacita.setText(fecha);
     }
 
@@ -259,6 +266,7 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
                     e.printStackTrace();
                 }
                 pDialog3.hide();
+                agregar_evento_calendario();
                 new SweetAlertDialog(getContext())
                         .setTitleText(respuesta)
                         .show();
@@ -276,4 +284,33 @@ public class RegistraCita extends Fragment implements DatePickerDialog.OnDateSet
         RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
         requestQueue.add(request);
     }
+
+    public void agregar_evento_calendario(){
+
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(Calendar.DAY_OF_MONTH, dia);
+        cal.set(Calendar.MONTH, mes);
+        cal.set(Calendar.YEAR, año);
+
+        Integer horacita = Integer.parseInt(hora.getSelectedItem().toString());
+        Integer minutocita = Integer.parseInt(minuto.getSelectedItem().toString());
+        cal.set(Calendar.HOUR_OF_DAY, horacita);
+        cal.set(Calendar.MINUTE, minutocita);
+
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTimeInMillis());
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis()+60*60*1000);
+
+        intent.putExtra(CalendarContract.Events.ALL_DAY, false);
+        intent.putExtra(CalendarContract.Events.RRULE , "FREQ=DAILY");
+        intent.putExtra(CalendarContract.Events.TITLE, "Cita medica (ADEP)");
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, "Recuerde su cita medica el dia ("+fecha+")");
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION,"Valledupar-Cesar");
+
+        startActivity(intent);
+    }
+
 }

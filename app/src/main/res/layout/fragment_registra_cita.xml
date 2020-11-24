@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Complete los siguientes datos"
+            android:textColor="#3949AB"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -36,79 +37,108 @@
             android:layout_width="match_parent"
             android:layout_height="19dp" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seleccione el medico de preferencia: " />
-
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="13dp" />
-
-        <Spinner
-            android:id="@+id/medicocita"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp" />
+            android:background="@drawable/esquinas_redondas_diag"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione el medico de preferencia: "
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/elegirfecha"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:textColor="#fff" />
+            <Spinner
+                android:id="@+id/medicocita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="17dp" />
-
-        <TextView
-            android:id="@+id/fechacita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YYYY-M-DD"
-            android:textSize="24sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="11dp" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hora de la cita"
-            android:textSize="18sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/hora"
-                android:layout_width="191dp"
+            android:background="@drawable/esquinas_redondas_diag"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+            <Button
+                android:id="@+id/elegirfecha"
+                android:layout_width="171dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/horas" />
+                android:background="@drawable/button"
+                android:textColor="#fff" />
 
-            <Spinner
-                android:id="@+id/minuto"
-                android:layout_width="189dp"
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="17dp" />
+
+            <TextView
+                android:id="@+id/fechacita"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/minutos" />
+                android:text="YYYY-M-DD"
+                android:textSize="24sp" />
+
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/esquinas_redondas_diag"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="11dp" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora de la cita"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/hora"
+                    android:layout_width="191dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/horas" />
+
+                <Spinner
+                    android:id="@+id/minuto"
+                    android:layout_width="189dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/minutos" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
 
         <Space
             android:layout_width="match_parent"
@@ -116,10 +146,11 @@
 
         <Button
             android:id="@+id/guardarcita"
-            android:layout_width="171dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/agendarcita"
+            android:layout_width="173dp"
+            android:layout_height="45dp"
+            android:background="@drawable/guardarcita2"
             android:textColor="#fff" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

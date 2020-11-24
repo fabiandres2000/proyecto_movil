@@ -34,13 +34,13 @@
         android:id="@+id/cerrar_cesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="524dp"
+        android:layout_marginBottom="8dp"
         android:foregroundGravity="bottom|center"
-        app:backgroundTint="#34BD92"
+        app:backgroundTint="@color/cardview_light_background"
         app:layout_constraintBottom_toTopOf="@+id/menu_paciente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_lock_power_off" />
+        app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
