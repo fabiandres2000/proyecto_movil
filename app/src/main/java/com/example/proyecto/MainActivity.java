@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements  Response.Listene
         dialogo.setCancelable(true);
         dialogo.show();
 
-        String url="https://dep2020.000webhostapp.com/login.php?usuario="+usuario.getText().toString()+"" +
+        String url="https://dep2020.000webhostapp.com/login.php?usuario="+usuario.getText().toString()+
                 "&password="+password.getText().toString();
 
         url = url.replace(" ","%20");
