@@ -181,7 +181,8 @@
             <ScrollView
                 android:layout_width="match_parent"
 
-                android:layout_height="289dp">
+                android:layout_height="289dp"
+                android:background="@drawable/esquinas_redondas">
 
                 <LinearLayout
                     android:id="@+id/lista_check_sintomas"
@@ -196,8 +197,9 @@
 
             <Button
                 android:id="@+id/btn_diagnosticar"
-                android:layout_width="134dp"
-                android:layout_height="43dp"
+                android:layout_width="200dp"
+                android:layout_height="47dp"
+                android:background="@drawable/animacion_btn_diagnosticar"
                 android:textColor="#FFF"
                 android:textSize="18sp" />
 

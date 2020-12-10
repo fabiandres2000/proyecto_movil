@@ -30,6 +30,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
         app:rippleColor="#FFFFFF"
-        app:srcCompat="@android:drawable/ic_lock_power_off" />
+        app:srcCompat="@drawable/ic_baseline_power_settings_new_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
