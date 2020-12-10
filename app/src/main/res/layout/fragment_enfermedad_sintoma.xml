@@ -69,12 +69,12 @@
 
         <Button
             android:id="@+id/asociar"
-            android:layout_width="187dp"
-            android:layout_height="wrap_content"
+            android:layout_width="157dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/asociar"
+            android:background="@drawable/animacion_btn_asociar"
             android:textColor="#FFF"
             android:textSize="18sp" />
     </LinearLayout>

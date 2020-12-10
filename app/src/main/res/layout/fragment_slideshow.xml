@@ -15,6 +15,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="58dp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/cough"
+            app:srcCompat="@drawable/cough" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -26,17 +36,9 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="#FFFFFF"
-                    android:src="@drawable/cough"
-                    app:srcCompat="@drawable/cough" />
+
+
 
                 <Space
                     android:layout_width="match_parent"
@@ -113,13 +115,13 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/guardarad"
+                    android:background="@drawable/animacion_boton_guardar"
                     android:textColor="#FFF"
                     android:textSize="18sp" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="114dp" />
+                    android:layout_height="50dp" />
 
             </LinearLayout>
         </ScrollView>

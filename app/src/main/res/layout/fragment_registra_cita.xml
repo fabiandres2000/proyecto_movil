@@ -69,11 +69,12 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
+
             <Button
                 android:id="@+id/elegirfecha"
                 android:layout_width="171dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button"
+                android:layout_height="48dp"
+                android:background="@drawable/animacion_btn_fecha"
                 android:textColor="#fff" />
 
             <Space
@@ -147,8 +148,8 @@
         <Button
             android:id="@+id/guardarcita"
             android:layout_width="173dp"
-            android:layout_height="45dp"
-            android:background="@drawable/guardarcita2"
+            android:layout_height="48dp"
+            android:background="@drawable/animacion_guardar_cita"
             android:textColor="#fff" />
 
     </LinearLayout>

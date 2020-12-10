@@ -42,7 +42,7 @@
                 <ListView
                     android:id="@+id/lista_enfermedades"
                     android:layout_width="match_parent"
-                    android:layout_height="431dp"
+                    android:layout_height="452dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textSize="4dp">

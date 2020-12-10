@@ -5,7 +5,7 @@
 
     <!-- Color de fondo de la vista -->
     <solid
-        android:color="#633947AB" >
+        android:color="@color/verde_claro" >
     </solid>
 
     <!-- Color y ancho del borde del elemento -->

@@ -47,7 +47,9 @@
                 <ListView
                     android:id="@+id/lista_diagnosticos"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp" />
+                    android:layout_height="400dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

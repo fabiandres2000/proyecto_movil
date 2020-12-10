@@ -33,7 +33,7 @@
                 android:layout_height="57dp"
                 android:text="Datos Generales"
                 android:textAllCaps="false"
-                android:textColor="#3949AB"
+                android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:fontFamily="sans-serif-black" />
@@ -175,12 +175,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccione los sintomas que presenta "
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:background="@drawable/esquinas_redondas"
 
                 android:layout_height="289dp">
 
@@ -199,7 +198,6 @@
                 android:id="@+id/btn_diagnosticar"
                 android:layout_width="134dp"
                 android:layout_height="43dp"
-                android:background="@drawable/enviar2"
                 android:textColor="#FFF"
                 android:textSize="18sp" />
 

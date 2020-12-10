@@ -33,6 +33,8 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="215dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="Esta es una aplicacion de prueba, para la deteccion de enfermedades pulmonares, en la que el paciente indicara cuales sintomas presenta, luego
 la aplicacion consultara en la base de datos cuales sintomas de los que indico el paciente estan asociados a cierta enfermedad y le dara un diagnostico;
 presentando un porcentaje de riesgo de tener

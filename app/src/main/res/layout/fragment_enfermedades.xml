@@ -9,7 +9,7 @@
     tools:context=".EnfermedadesFragment">
 
     <LinearLayout
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="652dp"
         android:layout_margin="30dp"
         android:gravity="center_horizontal"
@@ -20,10 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="90dp" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -71,12 +67,12 @@
 
         <Button
             android:id="@+id/boton_guardar"
-            android:layout_width="192dp"
+            android:layout_width="157dp"
             android:layout_height="48dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/guardarad"
+            android:background="@drawable/animacion_boton_guardar"
             android:textColor="#FFF"
             android:textSize="18sp" />
 

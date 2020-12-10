@@ -43,13 +43,15 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="          Codigo        Descripcion"
+                    android:text="Código        Descripción"
                     android:textSize="24sp" />
 
                 <ListView
                     android:id="@+id/lista"
                     android:layout_width="match_parent"
-                    android:layout_height="424dp">
+                    android:layout_height="452dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                 </ListView>
             </LinearLayout>
